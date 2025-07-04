@@ -1,9 +1,6 @@
 from flask import Flask
-from app.extentions import db,migrate,jwt
-from app.controllers.auth.auth_cotroller import auth
-from app.controllers.users.user_controller import users
-from app.controllers.companies.company_cotroller import companies
-from app.controllers.books.book_controller import books
+from app.extensions import db,migrate,jwt
+from app.models import accomodations, booking, customer, payments, tour, tour_assignment, tour_guide, users
 
 
 def create_app():
@@ -17,20 +14,35 @@ def create_app():
 
     #importing models
     from app.models.users import User
-    from app.models.companies import Company
-    from app.models.books import Book
+    from app.models.customer import Customer
+    from app.models.payments import Payment
+    from app.models.accomodations import Accomodation
+    from app.models.tour_assignment import Tour_assignment
+    from app.models.tour import Tour
+    from app.models.tour_guide import Tour_guide
+    from app.models.booking import Booking
+    
+    
     
     #registering blue prints
-    app.register_blueprint(auth)
+    app.register_blueprint(customer)
+    app.register_blueprint(accomodations)
+    app.register_blueprint(payments)
+    app.register_blueprint(tour_assignment)
+    app.register_blueprint(tour)
+    app.register_blueprint(tour_guide)
     app.register_blueprint(users)
-    app.register_blueprint(companies)
-    app.register_blueprint(books)
+    app.register_blueprint(booking)
+    
+    
+    
+    
     
 
 
     @app.route('/')
     def home():
-        return 'Authors API'
+        return ' API'
 
 
     return app

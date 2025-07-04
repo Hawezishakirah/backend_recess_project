@@ -1,4 +1,4 @@
-from app.extentions import db
+from app.extensions import db
 from datetime import datetime
 
 class Tour_assignment(db.Model):
@@ -14,4 +14,4 @@ class Tour_assignment(db.Model):
         
        
     def __repr__(self):
-        return f'Tour_assignment {self.title}'
+        return f'Tour_assignment {self.assignment_date}'

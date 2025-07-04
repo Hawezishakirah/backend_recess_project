@@ -1,4 +1,4 @@
-from app.extentions import db
+from app.extensions import db
 from datetime import datetime
 
 class Payment(db.Model):
@@ -6,7 +6,7 @@ class Payment(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     payment_date = db.Column(db.String(150),nullable=False)
     amount = db.Column(db.Integer,nullable=False)
-    payment_method= db.Column(db.Integer,nullable=False)
+    payment_method= db.Column(db.String(250),nullable=False)
     created_at = db.Column(db.DateTime,default=datetime.now())
     updated_at = db.Column(db.DateTime,onupdate=datetime.now())
 
@@ -15,6 +15,6 @@ class Payment(db.Model):
         self.payment_date = payment_date
         self.amount = amount
         self.payment_method = payment_method
-        
+
     def __repr__(self):
-        return f'Customer {self.title}'
+        return f'Payment {self.payment_method}'

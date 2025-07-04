@@ -1,4 +1,4 @@
-from app.extentions import db
+from app.extensions import db
 from datetime import datetime
 
 class Booking(db.Model):
@@ -6,8 +6,8 @@ class Booking(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     booking_date = db.Column(db.Integer,nullable=False)
     number_of_people= db.Column(db.Integer,nullable=False)
-    total_price = db.Column(db.String(100),nullable=False,default='UGX')
-    status = db.Column(db.Date,nullable=False)
+    total_price = db.Column(db.Integer,nullable=False,default='UGX')
+    status = db.Column(db.String,nullable=False)
     created_at = db.Column(db.DateTime,default=datetime.now())
     updated_at = db.Column(db.DateTime,onupdate=datetime.now())
 
@@ -20,4 +20,4 @@ class Booking(db.Model):
 
        
     def __repr__(self):
-        return f'Customer {self.title}'
+        return f'Booking {self.total_price}'

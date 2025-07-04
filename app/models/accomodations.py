@@ -1,4 +1,4 @@
-from app.extentions import db
+from app.extensions import db
 from datetime import datetime
 
 class Accomodation(db.Model):
@@ -6,7 +6,7 @@ class Accomodation(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     full_names = db.Column(db.String(150),nullable=False)
     address = db.Column(db.String(100),nullable=False,default='UGX')
-    type = db.Column(db.Date,nullable=False)
+    type = db.Column(db.String,nullable=False)
     created_at = db.Column(db.DateTime,default=datetime.now())
     updated_at = db.Column(db.DateTime,onupdate=datetime.now())
 
