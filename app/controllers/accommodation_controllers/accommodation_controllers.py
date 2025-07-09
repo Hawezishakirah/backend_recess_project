@@ -5,7 +5,7 @@ from app.status_codes import (
     HTTP_201_CREATED, HTTP_401_UNAUTHORIZED, HTTP_200_OK, HTTP_404_NOT_FOUND,
     HTTP_403_FORBIDDEN
 )
-from app.models.accomodations import Accommodation
+from app.models.accomodations import Accomodation
 from app.models.users import User
 from app.extensions import db
 
@@ -30,11 +30,11 @@ def create_accommodation():
     if not name or not location or not price or not description or not start_date or not end_date or not company_id:
         return jsonify({'error': 'All fields are required'}), HTTP_400_BAD_REQUEST
 
-    if Accommodation.query.filter_by(name=name, user_id=user_id).first():
+    if accommodations.query.filter_by(name=name, user_id=user_id).first():
         return jsonify({'error': 'You already created an accommodation with this name'}), HTTP_409_CONFLICT
 
     try:
-        new_accommodation = Accommodation(
+        new_accommodation = accommodations(
             name=name,
             location=location,
             price=price,
@@ -80,7 +80,7 @@ def create_accommodation():
 @jwt_required()
 def get_all_accommodations():
     try:
-        accommodations_list = Accommodation.query.all()
+        accommodations_list = accommodations.query.all()
         data = []
 
         for acc in accommodations_list:
@@ -109,7 +109,7 @@ def get_all_accommodations():
 @jwt_required()
 def get_accommodation(id):
     try:
-        acc = Accommodation.query.get(id)
+        acc = accommodations.query.get(id)
 
         if not acc:
             return jsonify({'error': 'Accommodation not found'}), HTTP_404_NOT_FOUND
@@ -137,7 +137,7 @@ def update_accommodation(id):
     current_user = get_jwt_identity()
     user = User.query.get(current_user)
 
-    acc = Accommodation.query.get(id)
+    acc = accommodations.query.get(id)
     if not acc:
         return jsonify({'error': 'Accommodation not found'}), HTTP_404_NOT_FOUND
 
@@ -171,7 +171,7 @@ def delete_accommodation(id):
     current_user = get_jwt_identity()
     user = User.query.get(current_user)
 
-    acc = Accommodation.query.get(id)
+    acc = accommodations.query.get(id)
     if not acc:
         return jsonify({'error': 'Accommodation not found'}), HTTP_404_NOT_FOUND
 
